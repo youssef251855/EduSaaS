@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isValidUser() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['id', 'name', 'username', 'createdAt', 'plan']) &&
+             data.id == request.auth.uid &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.username is string && data.username.size() > 2 && data.username.size() < 50 &&
+             data.plan in ['free', 'pro'] &&
+             (!('bio' in data) || (data.bio is string && data.bio.size() <= 1000)) &&
+             (!('image' in data) || (data.image is string && data.image.size() <= 500));
+    }
+
+    function isValidVideo() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['id', 'userId', 'title', 'videoId', 'youtubeUrl', 'createdAt']) &&
+             data.userId == request.auth.uid &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 200 &&
+             data.videoId is string && data.videoId.size() > 0 && data.videoId.size() < 50 &&
+             data.youtubeUrl is string && data.youtubeUrl.size() > 0 && data.youtubeUrl.size() < 200 &&
+             (!('description' in data) || (data.description is string && data.description.size() <= 2000));
+    }
+
+    match /users/{userId} {
+      // Anyone can read a user profile (for the public portfolio)
+      allow read: if true;
+      // Only the owner can create or update their profile
+      allow create: if isOwner(userId) && isValidUser();
+      allow update: if isOwner(userId) && isValidUser() && request.resource.data.id == resource.data.id;
+    }
+
+    match /videos/{docId} {
+      // Anyone can read videos (for the public portfolio)
+      allow read: if true;
+      // Only the owner can create, update, or delete their videos
+      allow create: if isAuthenticated() && isValidVideo();
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && isValidVideo() && request.resource.data.userId == resource.data.userId;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+  }
+}

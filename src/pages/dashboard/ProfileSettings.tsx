@@ -82,7 +82,7 @@ export default function ProfileSettings() {
             <label className="block text-sm font-medium text-gray-700">اسم المستخدم</label>
             <div className="mt-1 flex rounded-md shadow-sm" dir="ltr">
               <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                edusaas.com/teacher/
+                edu-saa-s.vercel.app/teacher/
               </span>
               <input
                 type="text"

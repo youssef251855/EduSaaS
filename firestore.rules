@@ -12,13 +12,13 @@ service cloud.firestore {
     
     function isValidUser() {
       let data = request.resource.data;
-      return data.keys().hasAll(['id', 'name', 'username', 'createdAt', 'plan']) &&
+      return data.keys().hasAll(['id', 'name', 'username']) &&
              data.id == request.auth.uid &&
              data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
-             data.username is string && data.username.size() > 2 && data.username.size() < 50 &&
-             data.plan in ['free', 'pro'] &&
-             (!('bio' in data) || (data.bio is string && data.bio.size() <= 1000)) &&
-             (!('image' in data) || (data.image is string && data.image.size() <= 500));
+             data.username is string && data.username.size() > 0 && data.username.size() < 50 &&
+             (!('plan' in data) || data.plan in ['free', 'pro']) &&
+             (!('bio' in data) || (data.bio is string && data.bio.size() <= 2000)) &&
+             (!('image' in data) || (data.image is string && data.image.size() <= 1000));
     }
 
     function isValidVideo() {

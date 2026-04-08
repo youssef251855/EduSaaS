@@ -32,39 +32,39 @@ export default function Overview() {
     fetchData();
   }, [user]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>جاري التحميل...</div>;
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard Overview</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-6">نظرة عامة على لوحة التحكم</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 font-medium">Total Videos</h3>
+            <h3 className="text-gray-500 font-medium">إجمالي الفيديوهات</h3>
             <Video className="w-5 h-5 text-indigo-500" />
           </div>
           <p className="text-3xl font-bold text-gray-900">{videoCount}</p>
           <p className="text-sm text-gray-500 mt-2">
-            {profile?.plan === 'free' ? `${videoCount} / 5 videos used` : 'Unlimited videos'}
+            {profile?.plan === 'free' ? `تم استخدام ${videoCount} / 5 فيديوهات` : 'فيديوهات غير محدودة'}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 font-medium">Current Plan</h3>
+            <h3 className="text-gray-500 font-medium">الخطة الحالية</h3>
             <div className="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full uppercase">
-              {profile?.plan || 'Free'}
+              {profile?.plan || 'مجانية'}
             </div>
           </div>
           <p className="text-sm text-gray-600 mt-2">
-            {profile?.plan === 'free' ? 'Upgrade to Pro for unlimited uploads.' : 'You are on the Pro plan.'}
+            {profile?.plan === 'free' ? 'قم بالترقية إلى الخطة الاحترافية لرفع غير محدود.' : 'أنت على الخطة الاحترافية.'}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-500 font-medium">Public Profile</h3>
+            <h3 className="text-gray-500 font-medium">الملف الشخصي العام</h3>
             <Eye className="w-5 h-5 text-indigo-500" />
           </div>
           {profile?.username ? (
@@ -74,10 +74,10 @@ export default function Overview() {
               className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-medium"
             >
               <LinkIcon className="w-4 h-4" />
-              View Portfolio
+              عرض المحفظة
             </Link>
           ) : (
-            <p className="text-sm text-gray-500">Set up your username in Profile Settings.</p>
+            <p className="text-sm text-gray-500">قم بإعداد اسم المستخدم في إعدادات الملف الشخصي.</p>
           )}
         </div>
       </div>

@@ -10,3 +10,10 @@ export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const googleProvider = new GoogleAuthProvider();
 // Request YouTube upload scope
 googleProvider.addScope('https://www.googleapis.com/auth/youtube.upload');
+// Request YouTube readonly scope to fetch channel info
+googleProvider.addScope('https://www.googleapis.com/auth/youtube.readonly');
+// Force account selection to ensure fresh tokens
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+

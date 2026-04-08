@@ -24,6 +24,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      if (!user) {
+        setYoutubeAccessToken(null);
+      }
       setLoading(false);
     });
 

@@ -14,9 +14,9 @@ export default function DashboardLayout() {
   };
 
   const navigation = [
-    { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-    { name: 'Profile', href: '/dashboard/profile', icon: UserCircle },
-    { name: 'Videos', href: '/dashboard/videos', icon: Video },
+    { name: 'نظرة عامة', href: '/dashboard', icon: LayoutDashboard },
+    { name: 'الملف الشخصي', href: '/dashboard/profile', icon: UserCircle },
+    { name: 'الفيديوهات', href: '/dashboard/videos', icon: Video },
   ];
 
   return (
@@ -28,8 +28,8 @@ export default function DashboardLayout() {
           onClick={handleLogout}
           className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
         >
-          <LogOut className="mr-2 h-5 w-5 text-gray-400" />
-          <span className="hidden sm:inline">Sign out</span>
+          <LogOut className="ml-2 h-5 w-5 text-gray-400" />
+          <span className="hidden sm:inline">تسجيل الخروج</span>
         </button>
       </header>
 

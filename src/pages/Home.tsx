@@ -11,9 +11,9 @@ export default function Home() {
             <span className="text-xl font-bold text-gray-900">EduSaaS</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/login" className="text-gray-600 hover:text-gray-900 font-medium">Log in</Link>
+            <Link to="/login" className="text-gray-600 hover:text-gray-900 font-medium">تسجيل الدخول</Link>
             <Link to="/register" className="bg-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:bg-indigo-700 transition-colors">
-              Get Started
+              ابدأ الآن
             </Link>
           </div>
         </div>
@@ -22,14 +22,14 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight mb-6">
-            Your Teaching Portfolio, <span className="text-indigo-600">Simplified.</span>
+            محفظتك التعليمية، <span className="text-indigo-600">بكل بساطة.</span>
           </h1>
           <p className="text-xl text-gray-600 mb-10">
-            Create a professional profile, upload your educational videos directly to YouTube, and share your knowledge with the world.
+            أنشئ ملفاً شخصياً احترافياً، وارفع فيديوهاتك التعليمية مباشرة إلى يوتيوب، وشارك علمك مع العالم.
           </p>
           <div className="flex justify-center gap-4">
             <Link to="/register" className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
-              Start for free <ArrowRight className="w-5 h-5" />
+              ابدأ مجاناً <ArrowRight className="w-5 h-5 rotate-180" />
             </Link>
           </div>
         </div>
@@ -39,22 +39,22 @@ export default function Home() {
             <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
               <Users className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Professional Profile</h3>
-            <p className="text-gray-600">Create a stunning public portfolio to showcase your expertise and attract more students.</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">ملف شخصي احترافي</h3>
+            <p className="text-gray-600">أنشئ محفظة عامة مذهلة لعرض خبراتك وجذب المزيد من الطلاب.</p>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
               <Video className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Video Management</h3>
-            <p className="text-gray-600">Upload and manage your educational videos seamlessly using our YouTube integration.</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">إدارة الفيديوهات</h3>
+            <p className="text-gray-600">ارفع وأدر فيديوهاتك التعليمية بسلاسة باستخدام تكامل يوتيوب الخاص بنا.</p>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
               <BookOpen className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Free & Pro Plans</h3>
-            <p className="text-gray-600">Start for free with up to 5 videos, or upgrade to Pro for unlimited uploads and features.</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">خطط مجانية واحترافية</h3>
+            <p className="text-gray-600">ابدأ مجاناً مع ما يصل إلى 5 فيديوهات، أو قم بالترقية إلى الخطة الاحترافية للحصول على ميزات ورفع غير محدود.</p>
           </div>
         </div>
       </main>

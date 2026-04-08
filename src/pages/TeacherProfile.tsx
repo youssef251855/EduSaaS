@@ -21,7 +21,7 @@ export default function TeacherProfile() {
         const userSnapshot = await getDocs(qUser);
         
         if (userSnapshot.empty) {
-          setError('Teacher not found');
+          setError('المعلم غير موجود');
           setLoading(false);
           return;
         }
@@ -38,7 +38,7 @@ export default function TeacherProfile() {
         setVideos(videosData.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
       } catch (err) {
         console.error('Error fetching public profile:', err);
-        setError('Failed to load profile');
+        setError('فشل في تحميل الملف الشخصي');
       } finally {
         setLoading(false);
       }
@@ -47,7 +47,7 @@ export default function TeacherProfile() {
     fetchProfileAndVideos();
   }, [username]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center">جاري التحميل...</div>;
   if (error) return <div className="min-h-screen flex items-center justify-center text-red-600">{error}</div>;
   if (!profile) return null;
 
@@ -76,6 +76,19 @@ export default function TeacherProfile() {
           <div className="flex-1">
             <h1 className="text-3xl font-extrabold text-gray-900">{profile.name}</h1>
             <p className="text-indigo-600 font-medium mt-1">@{profile.username}</p>
+            {profile.youtubeChannelTitle && (
+              <a 
+                href={`https://www.youtube.com/channel/${profile.youtubeChannelId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-3 text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 px-3 py-1.5 rounded-full transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                {profile.youtubeChannelTitle}
+              </a>
+            )}
             {profile.bio && (
               <p className="mt-4 text-gray-600 leading-relaxed max-w-2xl">
                 {profile.bio}
@@ -86,10 +99,10 @@ export default function TeacherProfile() {
 
         {/* Videos Section */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Educational Videos</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">الفيديوهات التعليمية</h2>
           {videos.length === 0 ? (
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center text-gray-500">
-              No videos uploaded yet.
+              لم يتم رفع أي فيديوهات بعد.
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

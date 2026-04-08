@@ -15,59 +15,57 @@ export default function DashboardLayout() {
 
   const navigation = [
     { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-    { name: 'Profile Settings', href: '/dashboard/profile', icon: UserCircle },
+    { name: 'Profile', href: '/dashboard/profile', icon: UserCircle },
     { name: 'Videos', href: '/dashboard/videos', icon: Video },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
-        <div className="h-16 flex items-center px-6 border-b border-gray-200">
-          <span className="text-xl font-bold text-indigo-600">EduSaaS</span>
-        </div>
-        <nav className="flex-1 px-4 py-6 space-y-1">
-          {navigation.map((item) => {
-            const isActive = location.pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  'flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors',
-                  isActive
-                    ? 'bg-indigo-50 text-indigo-700'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                )}
-              >
-                <item.icon
-                  className={cn(
-                    'mr-3 h-5 w-5 flex-shrink-0',
-                    isActive ? 'text-indigo-700' : 'text-gray-400'
-                  )}
-                />
-                {item.name}
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="p-4 border-t border-gray-200">
-          <button
-            onClick={handleLogout}
-            className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50 hover:text-gray-900"
-          >
-            <LogOut className="mr-3 h-5 w-5 text-gray-400" />
-            Sign out
-          </button>
-        </div>
-      </div>
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
+      {/* Top Header */}
+      <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 flex-shrink-0">
+        <span className="text-xl font-bold text-indigo-600">EduSaaS</span>
+        <button
+          onClick={handleLogout}
+          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+        >
+          <LogOut className="mr-2 h-5 w-5 text-gray-400" />
+          <span className="hidden sm:inline">Sign out</span>
+        </button>
+      </header>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <main className="flex-1 overflow-y-auto bg-gray-50 p-8">
-          <Outlet />
-        </main>
-      </div>
+      <main className="flex-1 overflow-y-auto p-4 sm:p-8">
+        <Outlet />
+      </main>
+
+      {/* Bottom Navigation */}
+      <nav className="bg-white border-t border-gray-200 flex-shrink-0 h-16 flex justify-around items-center px-2 sm:px-6 pb-safe">
+        {navigation.map((item) => {
+          const isActive = location.pathname === item.href;
+          return (
+            <Link
+              key={item.name}
+              to={item.href}
+              className={cn(
+                'flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors',
+                isActive
+                  ? 'text-indigo-600'
+                  : 'text-gray-500 hover:text-gray-900'
+              )}
+            >
+              <item.icon
+                className={cn(
+                  'h-5 w-5 sm:h-6 sm:w-6',
+                  isActive ? 'text-indigo-600' : 'text-gray-400'
+                )}
+              />
+              <span className={cn("text-[10px] sm:text-xs font-medium", isActive ? 'text-indigo-600' : 'text-gray-500')}>
+                {item.name}
+              </span>
+            </Link>
+          );
+        })}
+      </nav>
     </div>
   );
 }

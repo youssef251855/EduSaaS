@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { BookOpen, UserCircle } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 export default function TeacherProfile() {
   const { username } = useParams<{ username: string }>();
@@ -53,6 +54,14 @@ export default function TeacherProfile() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Helmet>
+        <title>{profile.name} - محفظة الفيديوهات التعليمية</title>
+        <meta name="description" content={profile.bio || `محفظة الفيديوهات التعليمية للأستاذ ${profile.name}. شاهد أحدث الدروس والشروحات.`} />
+        <meta property="og:title" content={`${profile.name} - محفظة الفيديوهات التعليمية`} />
+        <meta property="og:description" content={profile.bio || `محفظة الفيديوهات التعليمية للأستاذ ${profile.name}. شاهد أحدث الدروس والشروحات.`} />
+        {profile.image && <meta property="og:image" content={profile.image} />}
+      </Helmet>
+
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">

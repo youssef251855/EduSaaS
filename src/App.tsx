@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 
 // Pages
@@ -22,27 +23,29 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/teacher/:username" element={<TeacherProfile />} />
-          
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<Overview />} />
-            <Route path="profile" element={<ProfileSettings />} />
-            <Route path="videos" element={<VideosManager />} />
-          </Route>
-        </Routes>
-      </Router>
-      <Toaster position="top-right" />
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/teacher/:username" element={<TeacherProfile />} />
+            
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<Overview />} />
+              <Route path="profile" element={<ProfileSettings />} />
+              <Route path="videos" element={<VideosManager />} />
+            </Route>
+          </Routes>
+        </Router>
+        <Toaster position="top-right" />
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 
